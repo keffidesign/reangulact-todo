@@ -1,4 +1,3 @@
-import {Plugin} from 'applugins';
 import {initialize as initializeR} from 'reangulact-r';
 import {initialize as initializeNg, prepare as prepareNg} from 'reangulact-ng';
 const {bootstrap} = ng.platform.browser;

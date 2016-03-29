@@ -1,4 +1,5 @@
 import {Component} from 'reangulact';
+import PlatformToggler from './PlatformToggler.jsx';
 
 export default class UiHeader extends Component {
 
@@ -10,6 +11,7 @@ export default class UiHeader extends Component {
                     <a class='nav-link' href='#'>:datum.caption <span class='sr-only'>(current)</span></a>
                 </li>
             </ul>
+            <PlatformToggler />
         </nav>
     );
 

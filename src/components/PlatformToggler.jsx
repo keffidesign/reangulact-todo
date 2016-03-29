@@ -4,7 +4,7 @@ export default class UiPlatformToggler extends Component {
 
     getStyle() {
 
-        const style = {
+        return {
             'z-index': 9999,
             'top': '10px',
             'right': '10px',
@@ -18,40 +18,21 @@ export default class UiPlatformToggler extends Component {
             'background': (this.get('platform') === 'react' ? '#2D2D2D' : '#e03237')
         };
 
-        return style;
-
-    }
-
-    getCaption() {
-
-        return this.get('platform');
-
     }
 
     getPlatform() {
 
-        const platform = sessionStorage.getItem('platform');
-
-        return ['react', 'angular'].find(p => p !== platform);
+        return sessionStorage.getItem('platform');
 
     }
 
     click() {
 
-        const platform = this.get('platform');
+        sessionStorage.setItem('platform', ['react', 'angular'].find(p => p !== this.get('platform')));
 
-        sessionStorage.setItem('platform', platform);
-
-        location.search = ``;
+        location.reload();
 
     }
 
-    static TEMPLATE = (
-        <button
-            style=':style'
-            click=':click'
-            >
-            <block if=':caption'>:caption</block>
-        </button>
-    );
+    static TEMPLATE = <button style=':style' click=':click'>:platform</button>
 }

@@ -18,15 +18,15 @@ export default class TodosPage extends ui.Component {
 
     }
 
-    getTodos() {
-
-        return Array.prototype.map.call(localStorage, (caption, id) => ({id, caption}));
-
-    }
-
     change(value) {
 
         this.put('value', value);
+
+    }
+
+    getTodos() {
+
+        return Array.prototype.map.call(localStorage, (caption, id) => ({id, caption}));
 
     }
 
@@ -38,7 +38,6 @@ export default class TodosPage extends ui.Component {
 
     static TEMPLATE = (
         <div>
-            <ui.PlatformToggler />
             <ui.Header
                 caption='Todos'
                 />
