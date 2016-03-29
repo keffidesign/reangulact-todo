@@ -30,7 +30,7 @@ export default class UiPlatformToggler extends Component {
 
     getPlatform() {
 
-        const platform = getPlatform();
+        const platform = sessionStorage.getItem('platform');
 
         return ['react', 'angular'].find(p => p !== platform);
 
@@ -40,7 +40,9 @@ export default class UiPlatformToggler extends Component {
 
         const platform = this.get('platform');
 
-        location.search = `platform=${platform}`;
+        sessionStorage.setItem('platform', platform);
+
+        location.search = ``;
 
     }
 

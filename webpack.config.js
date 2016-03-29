@@ -4,7 +4,7 @@ module.exports = {
     cache: false,
     debug: true,
     entry:  {
-        app: './src/ui/UiPlugin.es6'
+        app: './src/client.es6'
         ,
         vendor: [
             'babel-regenerator-runtime'

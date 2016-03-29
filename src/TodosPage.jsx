@@ -1,39 +1,26 @@
-import * as ui from '../ui';
-import PlatformToggler from './components/PlatformToggler.jsx';
+import * as ui from './components';
 
 export default class TodosPage extends ui.Component {
-
-    init() {
-
-        this.reloadTodos();
-
-        super.init();
-
-    }
-
-    reloadTodos() {
-
-        this.put('todos', Array.prototype.map.call(localStorage.valueOf(), (caption, id) => ({id: `${id}`, caption})));
-
-    }
 
     clear() {
 
         localStorage.clear();
 
-        this.reloadTodos();
+        this.put('todos', []);
 
     }
 
     create() {
 
-        const value = this.get('value');
+        localStorage.setItem(`${localStorage.length}`, this.get('value'));
 
-        if (!value) return;
+        this.put('value', '');
 
-        localStorage.setItem(localStorage.length, value);
+    }
 
-        this.put('value', '', this.reloadTodos());
+    getTodos() {
+
+        return Array.prototype.map.call(localStorage, (caption, id) => ({id, caption}));
 
     }
 
@@ -43,9 +30,15 @@ export default class TodosPage extends ui.Component {
 
     }
 
+    getIsDisabled() {
+
+        return !this.get('value');
+
+    }
+
     static TEMPLATE = (
         <div>
-            <PlatformToggler/>
+            <ui.PlatformToggler />
             <ui.Header
                 caption='Todos'
                 />
@@ -61,6 +54,7 @@ export default class TodosPage extends ui.Component {
                 <ui.Button
                     caption='Create'
                     mode='primary'
+                    disabled=':isDisabled'
                     click=':create'
                     />
                 <ui.Button
