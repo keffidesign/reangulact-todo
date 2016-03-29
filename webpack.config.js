@@ -4,14 +4,14 @@ module.exports = {
     cache: false,
     debug: true,
     entry:  {
-        app: './src/client.es6'
+        app: './src/ui/UiPlugin.es6'
         ,
         vendor: [
             'babel-regenerator-runtime'
-            ,
-            'react',
-            'react-dom',
-            'react-router'
+            //,
+            //'react',
+            //'react-dom',
+            //'react-router'
         ]
     },
     output: {

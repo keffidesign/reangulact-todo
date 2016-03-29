@@ -27,9 +27,13 @@ export default class TodosPage extends ui.Component {
 
     create() {
 
-        localStorage.setItem(localStorage.length, this.get('value'));
+        const value = this.get('value');
 
-        this.put('value', ' ', () => this.reloadTodos());
+        if (!value) return;
+
+        localStorage.setItem(localStorage.length, value);
+
+        this.put('value', '', this.reloadTodos());
 
     }
 
@@ -45,11 +49,8 @@ export default class TodosPage extends ui.Component {
             <ui.Header
                 caption='Todos'
                 />
-            <ui.Content
-                //key=':todos.length'
-                >
+            <ui.Content>
                 <ui.List
-                    //if=':todos'
                     data=':todos'
                     />
                 <ui.Input

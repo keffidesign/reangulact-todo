@@ -6,14 +6,6 @@ export default class UiList extends DataComponent {
         emptyMessage: 'There is no data.'
     };
 
-    getEmptyData() {
-
-        console.log('EmptyData');
-
-        return false
-
-    }
-
     static TEMPLATE = (
         <div>
             <ul class='list-group' if=':data'>
@@ -31,3 +23,4 @@ export default class UiList extends DataComponent {
     );
 
 }
+

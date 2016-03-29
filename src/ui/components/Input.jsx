@@ -10,16 +10,6 @@ export default class UiInput extends Component {
 
     }
 
-    //getValue() {
-    //
-    //    const value = this.getState('value');
-    //
-    //    console.log('value', value, this);
-    //
-    //    return value;
-    //
-    //}
-
     static TEMPLATE = (
         <input
             class='form-control'

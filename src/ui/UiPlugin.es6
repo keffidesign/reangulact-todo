@@ -1,38 +1,33 @@
 import {Plugin} from 'applugins';
-import {bootstrap} from  './React.es6';
-import {bootstrapNg} from  './Angular.es6';
+import {initialize as initializeR} from 'reangulact-r';
+import {initialize as initializeNg, prepare as prepareNg} from 'reangulact-ng';
+const {bootstrap} = ng.platform.browser;
+import TodosPage from '../todos/TodosPage.jsx';
+
 
 window.getPlatform = function () {
 
-    return location
+    const platform = location
         .search
         .slice(1)
         .split('&')
         .map(s => s.split('='))
-        .find(p => p[0] === 'platform')[1];
+        .find(p => p[0] === 'platform');
 
-}
+    return platform ? platform [1] : 'react';
 
-export default class UiPlugin extends Plugin {
+};
 
-    async init() {
+if (getPlatform() === 'react') {
 
-        const pages = await this.event('ui://registerPages').promise();
+    initializeR();
 
-        console.log('getPlatform()', getPlatform());
+    ReactDOM.render(React.createElement(TodosPage), document.getElementById('root'));
 
-        getPlatform() === 'react' ? bootstrap(pages) : bootstrapNg(pages);
+} else {
 
-        return super.init();
+    initializeNg();
 
-    }
-
-    onUi_navigate({path}, cb) {
-
-        window.location.hash = '' + path.join('/');
-
-        return true;
-
-    }
+    bootstrap(prepareNg(TodosPage));
 
 }
