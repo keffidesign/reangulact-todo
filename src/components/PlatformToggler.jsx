@@ -22,7 +22,7 @@ export default class UiPlatformToggler extends Component {
 
     getPlatform() {
 
-        return sessionStorage.getItem('platform');
+        return sessionStorage.getItem('platform') || 'angular';
 
     }
 

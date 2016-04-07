@@ -34,7 +34,7 @@
   },
   "scripts": {
     "start": "npm run dev",
-    "dev": "webpack-dev-server --host 0.0.0.0 --port 8081 --inline --hot --content-base ./assets",
+    "dev": "webpack-dev-server --host 0.0.0.0 --port 8082 --inline --hot --content-base ./assets",
     "prod": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

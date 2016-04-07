@@ -2,17 +2,37 @@ import * as ui from './components';
 
 export default class TodosPage extends ui.Component {
 
+    static DEFAULTS = {dataChanged: 0};
+
+    getTodo(id) {
+
+        return JSON.parse(localStorage.getItem(id));
+
+    }
+
+    updateTodo(id, todo) {
+
+        todo ? localStorage.setItem(id, JSON.stringify(todo)) : localStorage.removeItem(id);
+
+    }
+
     clear() {
 
         localStorage.clear();
 
-        this.put('todos', []);
+        this.put('dataChanged', this.get('dataChanged') + 1);
 
     }
 
     create() {
 
-        localStorage.setItem(`${localStorage.length}`, this.get('value'));
+        const todo = {
+            id: `${Date.now()}`,
+            caption: this.get('value'),
+            checked: false
+        };
+
+        this.updateTodo(todo.id, todo);
 
         this.put('value', '');
 
@@ -26,13 +46,33 @@ export default class TodosPage extends ui.Component {
 
     getTodos() {
 
-        return Array.prototype.map.call(localStorage, (caption, id) => ({id, caption}));
+        return Object.keys(localStorage).map(k => this.getTodo(k));
 
     }
 
     getIsDisabled() {
 
         return !this.get('value');
+
+    }
+
+    toggleDone(id, value) {
+
+        const todo = this.getTodo(id);
+
+        this.updateTodo(id, {...todo, checked: value});
+
+        this.put('dataChanged', this.get('dataChanged') + 1);
+
+    }
+
+    deleteTodo(id) {
+
+        console.log('deleteTodo', id);
+
+        this.updateTodo(id, null);
+
+        this.put('dataChanged', this.get('dataChanged') + 1);
 
     }
 
@@ -44,6 +84,8 @@ export default class TodosPage extends ui.Component {
             <ui.Content>
                 <ui.List
                     data=':todos'
+                    check=':toggleDone'
+                    delete=':deleteTodo'
                     />
                 <ui.Input
                     caption='Name'
